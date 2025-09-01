@@ -1,0 +1,12 @@
+services:
+  database-server:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456 # Mật khẩu cho user root
+      MYSQL_DATABASE: project-management
+      MYSQL_ROOT_USERNAME: root
+    ports:
+      - "3306:3306"
+
+# docker compose up --build -d
