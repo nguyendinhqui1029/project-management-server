@@ -8,6 +8,8 @@ import { UserService } from '@services/user/user.service';
 import USERS_MOCK from '@mocks/users.mock.json';
 import PROJECT_MOCK from '@mocks/projects.mock.json';
 import PLANNING_DOCUMENT_MOCK from '@mocks/planning-document.mock.json';
+import PLANNING_DOCUMENT_DESCRIPTION_MOCK from '@mocks/planning-document-description.mock.json';
+import PLANNING_DOCUMENT_VERSION_MOCK from '@mocks/planning-document-version.mock.json';
 
 import { CreateUserRequestBodyDto } from '@dto/user.dto';
 import { PlanningDocumentVersionEntity } from '@entities/planning-document-versions.entity';
@@ -23,6 +25,8 @@ import { TicketBoardEntity } from '@entities/ticket-board.entity';
 import { TicketEntity } from '@entities/tickets.entity';
 import { ProjectService } from '@services/project/project.service';
 import { PlanningDocumentService } from '@services/planning-document/planning-document.service';
+import { PlanningDescriptionsService } from '@services/planning-descriptions/planning-descriptions.service';
+import { PlanningDocumentVersionService } from '@services/planning-document-version/planning-document-version.service';
 
 function getRandomInt(n: number, excludesIndex: number[]): number {
   let randomInt;
@@ -109,6 +113,31 @@ async function bootstrap() {
       createdBy: { id: userList[getRandomInt(userList.length, excludesPlanningDocumentUserListIndex)].id },
     });
     planningDocumentList.push(planningDocument);
+  }
+
+
+  console.log('🌱 Seeding planning documents description...');
+  const planningDocumentDescriptionService = app.get(PlanningDescriptionsService);
+  const planningDocumentDescriptionList: PlanningDescriptionEntity[] = [];
+  for (const item of PLANNING_DOCUMENT_DESCRIPTION_MOCK) {
+    const planningDocumentDescription = await planningDocumentDescriptionService.create({
+      ...item,
+      documents: [{id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id}],
+      createdBy: { id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id },
+    });
+    planningDocumentDescriptionList.push(planningDocumentDescription);
+  }
+
+  console.log('🌱 Seeding planning documents version...');
+  const planningDocumentVersionService = app.get(PlanningDocumentVersionService);
+  const planningDocumentVersionList: PlanningDocumentVersionEntity[] = [];
+  for (const item of PLANNING_DOCUMENT_VERSION_MOCK) {
+    const planningDocumentVersion = await planningDocumentVersionService.create({
+      ...item,
+      document: {id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id},
+      createdBy: { id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id },
+    });
+    planningDocumentVersionList.push(planningDocumentVersion);
   }
 
   console.log('✅ Done seeding!');

@@ -37,6 +37,8 @@ import { SprintEntity } from '@entities/sprints.entity';
 import { SprintPlanningEntity } from '@entities/sprint-plannings.entity';
 import { SprintRetroEntity } from '@entities/sprint-retros.entity';
 import { RetroItemEntity } from '@entities/retro-items.entity';
+import { PlanningDescriptionsService } from './services/planning-descriptions/planning-descriptions.service';
+import { PlanningDocumentVersionService } from './services/planning-document-version/planning-document-version.service';
 
 @Module({
   imports: [
@@ -73,6 +75,6 @@ import { RetroItemEntity } from '@entities/retro-items.entity';
     ]),
   ],
   controllers: [AppController, MeetingController, PlanningDocumentController, ProjectController, SprintRetroController, SprintPlanningController, SprintController, TicketBoardController, TicketController, UserController],
-  providers: [AppService, WebsocketGateway, ResponseInterceptor, UserService, MeetingService, PlanningDocumentService, ProjectService, SprintPlanningService, SprintRetroService, SprintService, TicketBoardService, TicketService],
+  providers: [AppService, WebsocketGateway, ResponseInterceptor, UserService, MeetingService, PlanningDocumentService, ProjectService, SprintPlanningService, SprintRetroService, SprintService, TicketBoardService, TicketService, PlanningDescriptionsService, PlanningDocumentVersionService],
 })
 export class AppModule {}

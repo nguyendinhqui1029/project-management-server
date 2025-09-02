@@ -8,24 +8,28 @@ import { Repository } from 'typeorm';
 export class PlanningDocumentService {
     constructor(
       @InjectRepository(PlanningDocumentEntity)
-      private readonly userRepo: Repository<PlanningDocumentEntity>,
+      private readonly planningDocumentEntityRepo: Repository<PlanningDocumentEntity>,
     ) {}
   
     create(data: CreatePlanningDocumentBodyDto) {
-      const product = this.userRepo.create(data);
-      return this.userRepo.save(product);
+      const product = this.planningDocumentEntityRepo.create(data);
+      return this.planningDocumentEntityRepo.save(product);
     }
 
     update(id:number, data: CreatePlanningDocumentBodyDto) {
-      return this.userRepo.update({ id: id }, data);
+      return this.planningDocumentEntityRepo.update({ id: id }, data);
     }
   
     delete(id: number) {
-      return this.userRepo.delete(id);
+      return this.planningDocumentEntityRepo.delete(id);
     }
-    
-    getUserById(id: number) {
-     return this.userRepo.findOne({where: { id }});
-    }
+
+    async getPlanningDocumentById(id: number) {
+     const result = this.planningDocumentEntityRepo.findOne({
+      where: { id }, 
+      relations: ['createdBy', 'updatedBy', 'project', 'descriptions', 'versions']
+    });
+    return result
+  }
 }
 

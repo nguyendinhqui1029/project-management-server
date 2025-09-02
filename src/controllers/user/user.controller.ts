@@ -11,17 +11,17 @@ export class UserController {
     return this.userService.create(body);
   }
 
-  @Put(':id')
+  @Put('/:id')
   updateUser(@Param('id') id: number, @Body() body: UpdateUserRequestBodyDto) {
     return this.userService.update(id, body);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   deleteUser(@Param('id') id: number) {
     return this.userService.delete(id);
   }
 
-  @Get(':id')
+  @Get('/:id')
   getUser(@Param('id') id: number) {
     return this.userService.getUserById(id);
   }

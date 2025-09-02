@@ -1,0 +1,60 @@
+[
+  {
+    "version": "v1.0",
+    "content": "{\"sections\": [{\"title\": \"Intro\", \"text\": \"Initial draft of planning doc\"}]}",
+    "createdBy": {
+      "id": 1
+    },
+    "updatedBy": {
+      "id": 2
+    },
+    "createdAt": "2025-09-01T10:00:00.000Z",
+    "updatedAt": "2025-09-01T12:00:00.000Z"
+  },
+  {
+    "version": "v1.1",
+    "content": "{\"sections\": [{\"title\": \"Scope\", \"text\": \"Added project scope\"}]}",
+    "createdBy": {
+      "id": 2
+    },
+    "updatedBy": {
+      "id": 3
+    },
+    "createdAt": "2025-09-01T13:00:00.000Z",
+    "updatedAt": "2025-09-01T15:00:00.000Z"
+  },
+  {
+    "version": "v2.0",
+    "content": "{\"sections\": [{\"title\": \"Timeline\", \"text\": \"Defined project phases\"}]}",
+    "createdBy": {
+      "id": 3
+    },
+    "updatedBy": {
+      "id": 1
+    },
+    "createdAt": "2025-09-02T09:00:00.000Z",
+    "updatedAt": "2025-09-02T11:00:00.000Z"
+  },
+  {
+    "version": "v2.1",
+    "content": "{\"sections\": [{\"title\": \"Risks\", \"text\": \"Listed potential blockers\"}]}",
+    "createdBy": {
+      "id": 1
+    },
+    "updatedBy": {
+      "id": 4
+    },
+    "createdAt": "2025-09-02T12:00:00.000Z",
+    "updatedAt": "2025-09-02T13:30:00.000Z"
+  },
+  {
+    "version": "v3.0",
+    "content": "{\"sections\": [{\"title\": \"Final\", \"text\": \"Approved project plan\"}]}",
+    "createdBy": {
+      "id": 4
+    },
+    "updatedBy": null,
+    "createdAt": "2025-09-02T14:00:00.000Z",
+    "updatedAt": "2025-09-02T14:00:00.000Z"
+  }
+]

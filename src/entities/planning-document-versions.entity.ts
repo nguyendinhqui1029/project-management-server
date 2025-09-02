@@ -18,7 +18,7 @@ export class  PlanningDocumentVersionEntity {
   document!: PlanningDocumentEntity;
 
   @Column()
-  versionNumber!: string;
+  version!: string;
 
   @Column({ type: 'json' })
   content!: string;

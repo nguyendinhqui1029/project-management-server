@@ -25,6 +25,10 @@ export class PlanningDescriptionRefDto {
   id!: number;
 }
 
+export class PlanningDocumentRefDto {
+  @IsNotEmpty({ message: 'Planning Document ID is required' })
+  id!: number;
+}
 export class CreatePlanningDocumentBodyDto {
   @ValidateNested()
   @Type(() => ProjectRefDto)

@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Password Validation Rule",
+    "rules": "{\"minLength\": 8, \"requireUpperCase\": true, \"requireNumber\": true}",
+    "description": "Rule to validate user passwords",
+    "messages": "{\"minLength\": \"Password must be at least 8 characters\", \"requireUpperCase\": \"Password must contain an uppercase letter\", \"requireNumber\": \"Password must contain a number\"}",
+    "createdBy": {
+      "id": 1
+    }
+  },
+  {
+    "title": "Email Validation Rule",
+    "rules": "{\"pattern\": \"^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$\"}",
+    "description": "Ensure valid email format",
+    "messages": "{\"pattern\": \"Invalid email address format\"}",
+    "createdBy": {
+      "id": 2
+    }
+  },
+  {
+    "title": "Username Validation Rule",
+    "rules": "{\"minLength\": 4, \"maxLength\": 20, \"noSpaces\": true}",
+    "messages": "{\"minLength\": \"Username must be at least 4 characters\", \"maxLength\": \"Username must not exceed 20 characters\", \"noSpaces\": \"Username cannot contain spaces\"}",
+    "createdBy": {
+      "id": 3
+    }
+  },
+  {
+    "title": "Project Title Rule",
+    "rules": "{\"maxLength\": 100, \"required\": true}",
+    "description": "Validation for project titles",
+    "messages": "{\"maxLength\": \"Project title must not exceed 100 characters\", \"required\": \"Project title is required\"}",
+    "createdBy": {
+      "id": 4
+    }
+  },
+  {
+    "title": "Meeting Description Rule",
+    "rules": "{\"maxLength\": 500}",
+    "description": "Ensure meeting descriptions are not too long",
+    "messages": "{\"maxLength\": \"Description must not exceed 500 characters\"}",
+    "createdBy": {
+      "id": 5
+    }
+  }
+]
