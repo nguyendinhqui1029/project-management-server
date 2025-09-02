@@ -1,0 +1,50 @@
+[
+  {
+    "username": "admin01",
+    "email": "admin01@example.com",
+    "password": "Admin@123",
+    "fullName": "Admin User",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "role": "Admin"
+  },
+  {
+    "username": "pm01",
+    "email": "pm01@example.com",
+    "password": "PM@123",
+    "fullName": "Project Manager",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "role": "PM"
+  },
+  {
+    "username": "be01",
+    "email": "be01@example.com",
+    "password": "BE@123",
+    "fullName": "Backend Developer",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "role": "BE"
+  },
+  {
+    "username": "fe01",
+    "email": "fe01@example.com",
+    "password": "FE@123",
+    "fullName": "Frontend Developer",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "role": "FE"
+  },
+  {
+    "username": "qa01",
+    "email": "qa01@example.com",
+    "password": "QA@123",
+    "fullName": "QA Engineer",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "role": "QA"
+  },
+  {
+    "username": "viewer01",
+    "email": "viewer01@example.com",
+    "password": "Viewer@123",
+    "fullName": "Viewer User",
+    "avatar": "https://i.pravatar.cc/150?img=6",
+    "role": "Viewer"
+  }
+]

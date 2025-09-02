@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany } from 'typeorm';
-import { ProjectUser } from '@entities/project-users.entity';
-import { Ticket } from '@entities/tickets.entity';
-import { Meeting } from '@entities/meeting.entity';
-
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany, BeforeInsert } from 'typeorm';
+import { TicketEntity } from '@entities/tickets.entity';
+import { MeetingEntity } from '@entities/meeting.entity';
+import { ProjectEntity } from '@entities/projects.entity';
 @Entity('users')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -14,11 +13,18 @@ export class User {
   @Column({ unique: true })
   email!: string;
 
-  @Column()
-  passwordHash!: string;
+  @Column({ select: false })
+  password!: string;
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = this.password;
+  }
 
   @Column()
   fullName!: string;
+
+  @Column({ nullable: true })
+  avatar!: string;
 
   @Column({ type: 'enum', enum: ['Admin', 'PM', 'BE', 'FE', 'QA', 'Viewer'], default: 'Viewer' })
   role!: string;
@@ -32,15 +38,19 @@ export class User {
   @UpdateDateColumn()
   updatedAt?: Date;
 
-  @OneToMany(() => ProjectUser, pu => pu.user)
-  projectUsers: ProjectUser[] = [];
+  @OneToMany(() => ProjectEntity, (project) => project.owner)
+  ownedProjects?: ProjectEntity[];
 
-  @OneToMany(() => Ticket, t => t.assignee)
-  assignedTickets: Ticket[] =[];
+  // Quan hệ N-N: user tham gia project
+  @ManyToMany(() => ProjectEntity, (project) => project.participants)
+  participatingProjects?: ProjectEntity[];
 
-  @OneToMany(() => Ticket, t => t.reporter)
-  reportedTickets: Ticket[] =[];
+  @OneToMany(() => TicketEntity, (t) => t.assignee)
+  assignedTickets?: TicketEntity[];
 
-  @OneToMany(() => Meeting, m => m.participants)
-  meetings: Meeting[] = [];
+  @OneToMany(() => TicketEntity, (t) => t.reporter)
+  reportedTickets?: TicketEntity[];
+
+  @OneToMany(() => MeetingEntity, (m) => m.participants)
+  meetings?: MeetingEntity[];
 }

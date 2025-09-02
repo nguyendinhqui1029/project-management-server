@@ -6,18 +6,18 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Retro } from '@entities/retros.entity';
+import { SprintRetroEntity } from '@entities/sprint-retros.entity';
 
 export type RetroItemStatus = 'Approve' | 'Reject';
 export type RetroItemType = 'WentWell' | 'ToImprove';
 
 @Entity('retro_items')
-export class RetroItem {
+export class RetroItemEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @ManyToOne(() => Retro, (retro) => retro.items, { onDelete: 'CASCADE' })
-  retro!: Retro;
+  @ManyToOne(() => SprintRetroEntity, (retro) => retro.items, { onDelete: 'CASCADE' })
+  retro!: SprintRetroEntity;
 
   @Column({ type: 'enum', enum: ['WentWell', 'ToImprove'] })
   type!: RetroItemType;

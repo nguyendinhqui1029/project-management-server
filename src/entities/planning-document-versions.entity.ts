@@ -6,16 +6,16 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PlanningDocument } from '@entities/planning-documents.entity';
-import { User } from '@entities/users.entity';
+import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
+import { UserEntity } from '@entities/users.entity';
 
 @Entity('planning_document_versions')
-export class PlanningDocumentVersion {
+export class  PlanningDocumentVersionEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => PlanningDocument, (doc) => doc.versions)
-  document!: PlanningDocument;
+  @ManyToOne(() => PlanningDocumentEntity, (doc) => doc.versions)
+  document!: PlanningDocumentEntity;
 
   @Column()
   versionNumber!: string;
@@ -23,11 +23,11 @@ export class PlanningDocumentVersion {
   @Column({ type: 'json' })
   content!: string;
 
-  @ManyToOne(() => User)
-  createdBy!: User;
+  @ManyToOne(() => UserEntity)
+  createdBy!: UserEntity;
 
-  @ManyToOne(() => User, { nullable: true })
-  updatedBy?: User;
+  @ManyToOne(() => UserEntity, { nullable: true })
+  updatedBy?: UserEntity;
 
   @CreateDateColumn()
   createdAt?: Date;

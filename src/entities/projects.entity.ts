@@ -1,13 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
-import { User } from '@entities/users.entity';
-import { ProjectUser } from '@entities/project-users.entity';
-import { PlanningDocument } from '@entities/planning-documents.entity';
-import { TicketBoard } from '@entities/ticket-board.entity';
-import { Sprint } from '@entities/sprints.entity';
-import { Meeting } from '@entities/meeting.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, ManyToMany, JoinTable, UpdateDateColumn } from 'typeorm';
+import { UserEntity } from '@entities/users.entity';
+import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
+import { TicketBoardEntity } from '@entities/ticket-board.entity';
+import { SprintEntity } from '@entities/sprints.entity';
+import { MeetingEntity } from '@entities/meeting.entity';
 
 @Entity('projects')
-export class Project {
+export class ProjectEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -18,7 +17,7 @@ export class Project {
   description?: string;
 
   @Column({ type: 'date', nullable: true })
-  startDate?: Date;
+  startDate!: Date;
 
   @Column({ type: 'date', nullable: true })
   endDate?: Date;
@@ -26,24 +25,35 @@ export class Project {
   @Column({ type: 'enum', enum: ['Initiating', 'OnTrack', 'AtRisk', 'Delayed', 'Pending', 'Completed'], default: 'Initiating' })
   status!: string;
 
-  @ManyToOne(() => User)
-  owner!: User;
+  @ManyToOne(() => UserEntity)
+  owner!: UserEntity;
+
+  @ManyToOne(() => UserEntity)
+  updatedBy?: UserEntity;
 
   @CreateDateColumn()
   createdAt?: Date;
 
-  @OneToMany(() => ProjectUser, pu => pu.project)
-  projectUsers: ProjectUser[] = [];
+  @UpdateDateColumn()
+  updatedAt?: Date;
 
-  @OneToMany(() => PlanningDocument, pd => pd.project)
-  planningDocuments: PlanningDocument[] = [];
+  @ManyToMany(() => UserEntity, { cascade: true })
+  @JoinTable({
+    name: 'project_participants', // tên bảng trung gian
+    joinColumn: { name: 'project_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
+  })
+  participants?: UserEntity[];
 
-  @OneToMany(() => TicketBoard, tb => tb.project)
-  boards: TicketBoard[] = [];
+  @OneToMany(() => PlanningDocumentEntity, pd => pd.project)
+  planningDocuments?: PlanningDocumentEntity[];
 
-  @OneToMany(() => Sprint, s => s.project)
-  sprints: Sprint[] = [];
+  @OneToMany(() => TicketBoardEntity, tb => tb.project)
+  boards?: TicketBoardEntity[];
 
-  @OneToMany(() => Meeting, m => m.project)
-  meetings: Meeting[] = [];
+  @OneToMany(() => SprintEntity, s => s.project)
+  sprints?: SprintEntity[];
+
+  @OneToMany(() => MeetingEntity, m => m.project)
+  meetings?: MeetingEntity[];
 }

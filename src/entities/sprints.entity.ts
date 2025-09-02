@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { Project } from '@entities/projects.entity';
-import { Ticket } from '@entities/tickets.entity';
-import { Retro } from '@entities/retros.entity';
+import { ProjectEntity } from '@entities/projects.entity';
+import { TicketEntity } from '@entities/tickets.entity';
+import { SprintRetroEntity } from '@entities/sprint-retros.entity';
 
 @Entity('sprints')
-export class Sprint {
+export class SprintEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Project, p => p.sprints)
-  project!: Project;
+  @ManyToOne(() => ProjectEntity, p => p.sprints)
+  project!: ProjectEntity;
 
   @Column()
   name!: string;
@@ -26,9 +26,9 @@ export class Sprint {
   @Column({ type: 'enum', enum: ['Planned', 'Active', 'Completed'], default: 'Planned' })
   status!: string;
 
-  @OneToMany(() => Ticket, t => t.sprint)
-  tickets!: Ticket[];
+  @OneToMany(() => TicketEntity, t => t.sprint)
+  tickets!: TicketEntity[];
 
-  @OneToMany(() => Retro, r => r.sprint)
-  retros!: Retro[];
+  @OneToMany(() => SprintRetroEntity, r => r.sprint)
+  retros!: SprintRetroEntity[];
 }

@@ -7,11 +7,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PlanningDocument } from '@entities/planning-documents.entity';
-import { User } from '@entities/users.entity';
+import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
+import { UserEntity } from '@entities/users.entity';
 
 @Entity('planning_descriptions')
-export class PlanningDescription {
+export class PlanningDescriptionEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -27,11 +27,11 @@ export class PlanningDescription {
   @Column({ type: 'json', nullable: true })
   messages?: string;
 
-  @ManyToOne(() => User)
-  createdBy!: User;
+  @ManyToOne(() => UserEntity)
+  createdBy!: UserEntity;
 
-  @ManyToOne(() => User, { nullable: true })
-  updatedBy!: User;
+  @ManyToOne(() => UserEntity, { nullable: true })
+  updatedBy!: UserEntity;
 
   @CreateDateColumn()
   createdAt?: Date;
@@ -39,6 +39,6 @@ export class PlanningDescription {
   @UpdateDateColumn()
   updatedAt?: Date;
 
-  @ManyToMany(() => PlanningDocument, (doc) => doc.descriptions)
-  documents!: PlanningDocument[];
+  @ManyToMany(() => PlanningDocumentEntity, (doc) => doc.descriptions)
+  documents!: PlanningDocumentEntity[];
 }

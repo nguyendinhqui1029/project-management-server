@@ -8,16 +8,16 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Project } from '@entities/projects.entity';
-import { User } from '@entities/users.entity';
+import { ProjectEntity } from '@entities/projects.entity';
+import { UserEntity } from '@entities/users.entity';
 
 @Entity('meetings')
-export class Meeting {
+export class MeetingEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Project, (p) => p.meetings)
-  project!: Project;
+  @ManyToOne(() => ProjectEntity, (p) => p.meetings)
+  project!: ProjectEntity;
 
   @Column()
   title!: string;
@@ -37,16 +37,16 @@ export class Meeting {
   @Column({ type: 'text', nullable: true })
   meetingNotes?: string;
 
-  @ManyToOne(() => User)
-  createdBy!: User;
+  @ManyToOne(() => UserEntity)
+  createdBy!: UserEntity;
 
-  @ManyToMany(() => User, { cascade: true })
+  @ManyToMany(() => UserEntity, { cascade: true })
   @JoinTable({
     name: 'meeting_participants',
     joinColumn: { name: 'meeting_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
   })
-  participants!: User[];
+  participants!: UserEntity[];
 
   @CreateDateColumn()
   createdAt?: Date;

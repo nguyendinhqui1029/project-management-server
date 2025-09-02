@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Kickoff Meeting",
+    "createdBy": {
+      "id": 1
+    },
+    "updatedBy": {
+      "id": 2
+    }
+  },
+  {
+    "title": "Sprint Planning",
+    "createdBy": {
+      "id": 3
+    }
+  },
+  {
+    "title": "Daily Standup",
+    "createdBy": {
+      "id": 2
+    },
+    "updatedBy": {
+      "id": 4
+    }
+  },
+  {
+    "title": "Retrospective",
+    "createdBy": {
+      "id": 5
+    }
+  },
+  {
+    "title": "Tech Review",
+    "createdBy": {
+      "id": 4
+    },
+    "updatedBy": {
+      "id": 1
+    }
+  }
+]

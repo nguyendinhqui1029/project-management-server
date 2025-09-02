@@ -7,22 +7,22 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Sprint } from '@entities/sprints.entity';
-import { RetroItem } from '@entities/retro-items.entity';
+import { SprintEntity } from '@entities/sprints.entity';
+import { RetroItemEntity } from '@entities/retro-items.entity';
 
 @Entity('retros')
-export class Retro {
+export class SprintRetroEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Sprint, (s) => s.retros)
-  sprint!: Sprint;
+  @ManyToOne(() => SprintEntity, (s) => s.retros)
+  sprint!: SprintEntity;
 
   @Column({ type: 'text', nullable: true })
   summary?: string;
 
-  @OneToMany(() => RetroItem, (item) => item.retro, { cascade: true })
-  items!: RetroItem[];
+  @OneToMany(() => RetroItemEntity, (item) => item.retro, { cascade: true })
+  items!: RetroItemEntity[];
 
   @CreateDateColumn()
   createdAt?: Date;

@@ -1,18 +1,18 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { TicketBoard } from '@entities/ticket-board.entity';
-import { Sprint } from '@entities/sprints.entity';
-import { User } from '@entities/users.entity';
+import { TicketBoardEntity } from '@entities/ticket-board.entity';
+import { SprintEntity } from '@entities/sprints.entity';
+import { UserEntity } from '@entities/users.entity';
 
 @Entity('tickets')
-export class Ticket {
+export class TicketEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => TicketBoard, b => b.tickets)
-  board!: TicketBoard;
+  @ManyToOne(() => TicketBoardEntity, b => b.tickets)
+  board!: TicketBoardEntity;
 
-  @ManyToOne(() => Sprint, s => s.tickets, { nullable: true })
-  sprint!: Sprint;
+  @ManyToOne(() => SprintEntity, s => s.tickets, { nullable: true })
+  sprint!: SprintEntity;
 
   @Column()
   title!: string;
@@ -20,7 +20,7 @@ export class Ticket {
   @Column({ type: 'text', nullable: true })
   description!: string;
 
-  @Column({ type: 'enum', enum: ['Task', 'Bug', 'Story'], default: 'Task' })
+  @Column({ type: 'enum', enum: ['Epic','Defect','Task', 'DesignTask','Improvement','NewFeature','Incident','SubTask','Question','Problem','DevelopmentTask','Bug', 'Story'], default: 'Task' })
   type!: string;
 
   @Column({ type: 'enum', enum: ['Low', 'Medium', 'High', 'Critical'], default: 'Medium' })
@@ -29,11 +29,11 @@ export class Ticket {
   @Column({ type: 'enum', enum: ['Backlog', 'ToDo', 'InProgress', 'Review', 'Done'], default: 'Backlog' })
   status!: string;
 
-  @ManyToOne(() => User, u => u.assignedTickets, { nullable: true })
-  assignee!: User;
+  @ManyToOne(() => UserEntity, u => u.assignedTickets, { nullable: true })
+  assignee!: UserEntity;
 
-  @ManyToOne(() => User, u => u.reportedTickets)
-  reporter!: User;
+  @ManyToOne(() => UserEntity, u => u.reportedTickets)
+  reporter!: UserEntity;
 
   @Column({ type: 'int', nullable: true })
   estimate!: number;

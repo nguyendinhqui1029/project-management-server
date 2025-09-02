@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Project Alpha",
+    "description": "Project for frontend development",
+    "startDate": "2025-09-01T00:00:00.000Z",
+    "endDate": "2025-12-31T23:59:59.000Z",
+    "owner": {
+      "id": 1
+    },
+    "participants": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ]
+  },
+  {
+    "name": "Project Beta",
+    "description": "Backend services implementation",
+    "startDate": "2025-09-15T00:00:00.000Z",
+    "endDate": "2025-11-30T23:59:59.000Z",
+    "owner": {
+      "id": 2
+    },
+    "participants": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "name": "Project Gamma",
+    "description": "QA automation project",
+    "startDate": "2025-10-01T00:00:00.000Z",
+    "endDate": "2026-01-31T23:59:59.000Z",
+    "owner": {
+      "id": 3
+    },
+    "participants": [
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "name": "Project Delta",
+    "description": "Mobile app development",
+    "startDate": "2025-09-20T00:00:00.000Z",
+    "endDate": "2025-12-15T23:59:59.000Z",
+    "owner": {
+      "id": 4
+    },
+    "participants": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ]
+  },
+  {
+    "name": "Project Epsilon",
+    "description": "Internal tools and dashboards",
+    "startDate": "2025-10-05T00:00:00.000Z",
+    "endDate": "2026-02-28T23:59:59.000Z",
+    "owner": {
+      "id": 5
+    },
+    "participants": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ]
+  }
+]

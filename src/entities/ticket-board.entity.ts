@@ -1,20 +1,20 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Project } from '@entities/projects.entity';
-import { Ticket } from '@entities/tickets.entity';
+import { ProjectEntity } from '@entities/projects.entity';
+import { TicketEntity } from '@entities/tickets.entity';
 
 @Entity('ticket_boards')
-export class TicketBoard {
+export class TicketBoardEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Project, p => p.boards)
-  project!: Project;
+  @ManyToOne(() => ProjectEntity, p => p.boards)
+  project!: ProjectEntity;
 
   @Column()
   name!: string;
 
-  @OneToMany(() => Ticket, t => t.board)
-  tickets!: Ticket[];
+  @OneToMany(() => TicketEntity, t => t.board)
+  tickets!: TicketEntity[];
 
   @CreateDateColumn()
   createdAt?: Date;

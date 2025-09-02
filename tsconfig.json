@@ -31,6 +31,15 @@
       ],
       "@entities/*": [
         "src/entities/*"
+      ],
+      "@dto/*": [
+        "src/dto/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@mocks/*": [
+        "src/mocks/*"
       ]
     },
   }
