@@ -1,16 +1,4 @@
-import { Type } from 'class-transformer';
-import {
-  IsArray,
-  IsBoolean,
-  IsDate,
-  IsIn,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Min,
-  ValidateIf,
-} from 'class-validator';
+import { IsIn, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 enum UserRole {
   Admin = 'Admin',
@@ -23,7 +11,7 @@ enum UserRole {
 
 enum UserStatus {
   Active = 'Active',
-  Inactive = 'Inactive'
+  Inactive = 'Inactive',
 }
 
 export class UserRefDto {
@@ -35,7 +23,7 @@ export class CreateUserRequestBodyDto {
   @IsNotEmpty({ message: 'Username is required' })
   @IsString()
   username!: string;
-  
+
   @IsNotEmpty({ message: 'Email is required' })
   @IsString()
   email!: string;
@@ -61,7 +49,7 @@ export class UpdateUserRequestBodyDto {
   @IsNotEmpty({ message: 'Phone is required' })
   @IsString()
   username?: string;
-  
+
   @IsNotEmpty({ message: 'Email is required' })
   @IsString()
   email?: string;
@@ -79,7 +67,9 @@ export class UpdateUserRequestBodyDto {
   role?: UserRole;
 
   @IsOptional()
-  @IsIn(Object.values(UserStatus), { message: 'Status must be one of the following: ' + Object.values(UserStatus).join(', ') })
+  @IsIn(Object.values(UserStatus), {
+    message: 'Status must be one of the following: ' + Object.values(UserStatus).join(', '),
+  })
   status?: UserStatus;
 }
 
@@ -105,6 +95,8 @@ export class FetchUserRequestQueryDto {
   fullName?: string;
 
   @IsOptional()
-  @IsIn(Object.values(UserStatus), { message: 'Status must be one of the following: ' + Object.values(UserStatus).join(', ') })
+  @IsIn(Object.values(UserStatus), {
+    message: 'Status must be one of the following: ' + Object.values(UserStatus).join(', '),
+  })
   status?: UserStatus;
 }

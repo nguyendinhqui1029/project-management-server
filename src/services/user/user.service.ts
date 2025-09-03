@@ -16,15 +16,15 @@ export class UserService {
     return this.userRepo.save(product);
   }
 
-  update(id:number, data: UpdateUserRequestBodyDto) {
+  update(id: number, data: UpdateUserRequestBodyDto) {
     return this.userRepo.update({ id: id }, data);
   }
 
   delete(id: number) {
     return this.userRepo.delete(id);
   }
-  
+
   getUserById(id: number) {
-   return this.userRepo.findOne({where: { id }});
+    return this.userRepo.findOne({ where: { id } });
   }
 }

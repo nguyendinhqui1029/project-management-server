@@ -1,21 +1,14 @@
 import { Type } from 'class-transformer';
 import {
-  IsArray,
-  IsBoolean,
-  IsDate,
-  IsIn,
   IsJSON,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  Min,
-  ValidateIf,
   ValidateNested,
 } from 'class-validator';
 import { UserRefDto } from '@dto/user.dto';
 import { PlanningDocumentRefDto } from '@dto/planning-document.dto';
-
 
 export class CreatePlanningDocumentVersionBodyDto {
   @ValidateNested()

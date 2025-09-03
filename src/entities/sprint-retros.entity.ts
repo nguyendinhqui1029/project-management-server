@@ -10,7 +10,7 @@ import {
 import { SprintEntity } from '@entities/sprints.entity';
 import { RetroItemEntity } from '@entities/retro-items.entity';
 
-@Entity('retros')
+@Entity('sprint_retros')
 export class SprintRetroEntity {
   @PrimaryGeneratedColumn()
   id!: number;

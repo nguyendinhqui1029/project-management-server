@@ -1,17 +1,5 @@
 import { Type } from 'class-transformer';
-import {
-  IsArray,
-  IsBoolean,
-  IsDate,
-  IsIn,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Min,
-  ValidateIf,
-  ValidateNested,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { UserRefDto } from '@dto/user.dto';
 import { ProjectRefDto } from '@dto/project.dto';
 
@@ -81,5 +69,4 @@ export class FetchPlanningDocumentRequestQueryDto {
   @IsOptional()
   @IsString()
   title?: string;
-
 }

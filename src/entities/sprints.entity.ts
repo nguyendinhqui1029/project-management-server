@@ -8,7 +8,7 @@ export class SprintEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, p => p.sprints)
+  @ManyToOne(() => ProjectEntity, (p) => p.sprints)
   project!: ProjectEntity;
 
   @Column()
@@ -26,9 +26,9 @@ export class SprintEntity {
   @Column({ type: 'enum', enum: ['Planned', 'Active', 'Completed'], default: 'Planned' })
   status!: string;
 
-  @OneToMany(() => TicketEntity, t => t.sprint)
+  @OneToMany(() => TicketEntity, (t) => t.sprint)
   tickets!: TicketEntity[];
 
-  @OneToMany(() => SprintRetroEntity, r => r.sprint)
+  @OneToMany(() => SprintRetroEntity, (r) => r.sprint)
   retros!: SprintRetroEntity[];
 }

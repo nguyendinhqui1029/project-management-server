@@ -1,7 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  ManyToMany,
+  BeforeInsert,
+} from 'typeorm';
 import { TicketEntity } from '@entities/tickets.entity';
 import { MeetingEntity } from '@entities/meeting.entity';
 import { ProjectEntity } from '@entities/projects.entity';
+import * as bcrypt from 'bcryptjs';
 @Entity('users')
 export class UserEntity {
   @PrimaryGeneratedColumn()
@@ -15,9 +25,10 @@ export class UserEntity {
 
   @Column({ select: false })
   password!: string;
+
   @BeforeInsert()
-  async hashPassword() {
-    this.password = this.password;
+  async hashPassword(): Promise<void> {
+    this.password = await bcrypt.hash(this.password, 10);
   }
 
   @Column()

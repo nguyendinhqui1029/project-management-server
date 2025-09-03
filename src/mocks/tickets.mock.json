@@ -1,0 +1,262 @@
+[
+  {
+    "title": "Implement login API",
+    "description": "Create login endpoint with JWT authentication",
+    "type": "NewFeature",
+    "priority": "High",
+    "assignee": {
+      "id": 1
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 8
+  },
+  {
+    "title": "Fix UI bug on dashboard",
+    "description": "Resolve layout issue on Chrome browser",
+    "type": "Defect",
+    "priority": "Medium",
+    "assignee": {
+      "id": 3
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 3
+  },
+  {
+    "title": "Add unit tests for user service",
+    "description": "Cover at least 80% of methods with Jest tests",
+    "type": "Epic",
+    "priority": "Low",
+    "assignee": {
+      "id": 2
+    },
+    "reporter": {
+      "id": 4
+    },
+    "estimate": 5
+  },
+  {
+    "title": "Optimize database queries",
+    "description": "Refactor queries to improve performance",
+    "type": "Improvement",
+    "priority": "High",
+    "assignee": {
+      "id": 4
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 13
+  },
+  {
+    "title": "Add password reset feature",
+    "description": "Implement forgot password with email verification",
+    "type": "NewFeature",
+    "priority": "Critical",
+    "assignee": {
+      "id": 5
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 8
+  },
+  {
+    "title": "Update API documentation",
+    "description": "Regenerate Swagger docs after recent changes",
+    "type": "task",
+    "priority": "Low",
+    "assignee": {
+      "id": 2
+    },
+    "reporter": {
+      "id": 3
+    },
+    "estimate": 2
+  },
+  {
+    "title": "Fix login redirect issue",
+    "description": "Users are redirected incorrectly after login",
+    "type": "Bug",
+    "priority": "High",
+    "assignee": {
+      "id": 1
+    },
+    "reporter": {
+      "id": 5
+    },
+    "estimate": 3
+  },
+  {
+    "title": "Implement role-based access control",
+    "description": "Add RBAC for admin and normal users",
+    "type": "NewFeature",
+    "priority": "Critical",
+    "assignee": {
+      "id": 4
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 13
+  },
+  {
+    "title": "Improve error handling",
+    "description": "Standardize error response format",
+    "type": "Improvement",
+    "priority": "Medium",
+    "assignee": {
+      "id": 3
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 5
+  },
+  {
+    "title": "Fix email notification bug",
+    "description": "Emails not being sent in staging environment",
+    "type": "Bug",
+    "priority": "High",
+    "assignee": {
+      "id": 5
+    },
+    "reporter": {
+      "id": 4
+    },
+    "estimate": 2
+  },
+  {
+    "title": "Add project settings page",
+    "description": "UI for configuring project details",
+    "type": "NewFeature",
+    "priority": "Medium",
+    "assignee": {
+      "id": 2
+    },
+    "reporter": {
+      "id": 3
+    },
+    "estimate": 8
+  },
+  {
+    "title": "Fix API rate limit bug",
+    "description": "Requests are not throttled correctly",
+    "type": "Bug",
+    "priority": "critical",
+    "assignee": {
+      "id": 4
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 5
+  },
+  {
+    "title": "Refactor auth middleware",
+    "description": "Clean up code and improve maintainability",
+    "type": "Task",
+    "priority": "Low",
+    "assignee": {
+      "id": 3
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 3
+  },
+  {
+    "title": "Implement activity logs",
+    "description": "Track user actions in the system",
+    "type": "NewFeature",
+    "priority": "High",
+    "assignee": {
+      "id": 5
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 8
+  },
+  {
+    "title": "Fix mobile responsiveness",
+    "description": "Navbar not displaying correctly on iOS Safari",
+    "type": "Bug",
+    "priority": "High",
+    "assignee": {
+      "id": 1
+    },
+    "reporter": {
+      "id": 4
+    },
+    "estimate": 5
+  },
+  {
+    "title": "Improve logging system",
+    "description": "Switch to structured logging with Winston",
+    "type": "Improvement",
+    "priority": "Medium",
+    "assignee": {
+      "id": 2
+    },
+    "reporter": {
+      "id": 5
+    },
+    "estimate": 3
+  },
+  {
+    "title": "Add CI/CD pipeline",
+    "description": "Setup GitHub Actions for automated testing and deployment",
+    "type": "NewFeature",
+    "priority": "Critical",
+    "assignee": {
+      "id": 3
+    },
+    "reporter": {
+      "id": 1
+    },
+    "estimate": 13
+  },
+  {
+    "title": "Fix timezone issue",
+    "description": "Timestamps displayed incorrectly across regions",
+    "type": "Bug",
+    "priority": "High",
+    "assignee": {
+      "id": 4
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 5
+  },
+  {
+    "title": "Update dependencies",
+    "description": "Upgrade all npm packages to latest versions",
+    "type": "Task",
+    "priority": "Low",
+    "assignee": {
+      "id": 5
+    },
+    "reporter": {
+      "id": 3
+    },
+    "estimate": 2
+  },
+  {
+    "title": "Implement file upload",
+    "description": "Allow users to upload profile pictures",
+    "type": "NewFeature",
+    "priority": "Low",
+    "assignee": {
+      "id": 1
+    },
+    "reporter": {
+      "id": 2
+    },
+    "estimate": 8
+  }
+]

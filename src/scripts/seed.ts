@@ -10,6 +10,8 @@ import PROJECT_MOCK from '@mocks/projects.mock.json';
 import PLANNING_DOCUMENT_MOCK from '@mocks/planning-document.mock.json';
 import PLANNING_DOCUMENT_DESCRIPTION_MOCK from '@mocks/planning-document-description.mock.json';
 import PLANNING_DOCUMENT_VERSION_MOCK from '@mocks/planning-document-version.mock.json';
+import TICKET_BOARD_MOCK from '@mocks/ticket-board.mock.json';
+import TICKET_MOCK from '@mocks/tickets.mock.json';
 
 import { CreateUserRequestBodyDto } from '@dto/user.dto';
 import { PlanningDocumentVersionEntity } from '@entities/planning-document-versions.entity';
@@ -27,9 +29,11 @@ import { ProjectService } from '@services/project/project.service';
 import { PlanningDocumentService } from '@services/planning-document/planning-document.service';
 import { PlanningDescriptionsService } from '@services/planning-descriptions/planning-descriptions.service';
 import { PlanningDocumentVersionService } from '@services/planning-document-version/planning-document-version.service';
+import { TicketBoardService } from '@services/ticket-board/ticket-board.service';
+import { TicketService } from '@services/ticket/ticket.service';
 
 function getRandomInt(n: number, excludesIndex: number[]): number {
-  let randomInt;
+  let randomInt: number = 0;
   do {
     randomInt = Math.floor(Math.random() * n);
   } while (excludesIndex.includes(randomInt));
@@ -45,14 +49,17 @@ async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
 
   const dataSource = app.get(DataSource);
-  
+
+  console.log('⚡ Clearing database...');
+  await dataSource.synchronize(true); // ⚡ Xoá toàn bộ schema và tạo lại
+
   if (!dataSource.isInitialized) {
     await dataSource.initialize();
   }
 
   console.log('🧹 Deleting existing records...');
   await dataSource.query('SET FOREIGN_KEY_CHECKS=0;');
-  
+
   // clear tất cả bảng
   await dataSource.getRepository(RetroItemEntity).clear();
   await dataSource.getRepository(SprintRetroEntity).clear();
@@ -75,28 +82,27 @@ async function bootstrap() {
   // Services
   console.log('🌱 Seeding users...');
   const userService = app.get(UserService);
-  const userList:UserEntity[] = [];
+  const userList: UserEntity[] = [];
   for (const item of USERS_MOCK) {
     const user = await userService.create(item as CreateUserRequestBodyDto);
     userList.push(user);
   }
- 
 
-  console.log('🌱 Seeding projects...')
+  console.log('🌱 Seeding projects...');
   const projectService = app.get(ProjectService);
   const projectList: ProjectEntity[] = [];
   for (const item of PROJECT_MOCK) {
-    const excludesUserListIndex:number[] = [];
+    const excludesUserListIndex: number[] = [];
     const project = await projectService.create({
       ...item,
       startDate: parseDate(item.startDate) || new Date(),
       endDate: parseDate(item.endDate) || new Date(),
-      owner: {id: userList[getRandomInt(userList.length, [])].id},
+      owner: { id: userList[getRandomInt(userList.length, [])].id },
       participants: [
-        {id: userList[getRandomInt(userList.length, excludesUserListIndex)].id},
-        {id: userList[getRandomInt(userList.length, excludesUserListIndex)].id},
-        {id: userList[getRandomInt(userList.length, excludesUserListIndex)].id}
-      ]
+        { id: userList[getRandomInt(userList.length, excludesUserListIndex)].id },
+        { id: userList[getRandomInt(userList.length, excludesUserListIndex)].id },
+        { id: userList[getRandomInt(userList.length, excludesUserListIndex)].id },
+      ],
     });
     projectList.push(project);
   }
@@ -104,17 +110,21 @@ async function bootstrap() {
   console.log('🌱 Seeding planning documents...');
   const planningDocumentService = app.get(PlanningDocumentService);
   const planningDocumentList: PlanningDocumentEntity[] = [];
-  const excludesPlanningDocumentUserListIndex:number[] = [];
-  const excludesPlanningDocumentProjectListIndex:number[] = [];
+  const excludesPlanningDocumentUserListIndex: number[] = [];
+  const excludesPlanningDocumentProjectListIndex: number[] = [];
   for (const item of PLANNING_DOCUMENT_MOCK) {
     const planningDocument = await planningDocumentService.create({
       ...item,
-      project: { id: projectList[getRandomInt(projectList.length, excludesPlanningDocumentProjectListIndex)].id },
-      createdBy: { id: userList[getRandomInt(userList.length, excludesPlanningDocumentUserListIndex)].id },
+      project: {
+        id: projectList[getRandomInt(projectList.length, excludesPlanningDocumentProjectListIndex)]
+          .id,
+      },
+      createdBy: {
+        id: userList[getRandomInt(userList.length, excludesPlanningDocumentUserListIndex)].id,
+      },
     });
     planningDocumentList.push(planningDocument);
   }
-
 
   console.log('🌱 Seeding planning documents description...');
   const planningDocumentDescriptionService = app.get(PlanningDescriptionsService);
@@ -122,7 +132,7 @@ async function bootstrap() {
   for (const item of PLANNING_DOCUMENT_DESCRIPTION_MOCK) {
     const planningDocumentDescription = await planningDocumentDescriptionService.create({
       ...item,
-      documents: [{id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id}],
+      documents: [{ id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id }],
       createdBy: { id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id },
     });
     planningDocumentDescriptionList.push(planningDocumentDescription);
@@ -134,10 +144,34 @@ async function bootstrap() {
   for (const item of PLANNING_DOCUMENT_VERSION_MOCK) {
     const planningDocumentVersion = await planningDocumentVersionService.create({
       ...item,
-      document: {id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id},
+      document: { id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id },
       createdBy: { id: planningDocumentList[getRandomInt(planningDocumentList.length, [])].id },
     });
     planningDocumentVersionList.push(planningDocumentVersion);
+  }
+
+  console.log('🌱 Seeding ticket boards...');
+  const ticketBoardService = app.get(TicketBoardService);
+  const ticketBoardList: TicketBoardEntity[] = [];
+  for (const item of TICKET_BOARD_MOCK) {
+    const ticketBoard = await ticketBoardService.create({
+      ...item,
+      project: { id: projectList[getRandomInt(projectList.length, [])].id },
+    });
+    ticketBoardList.push(ticketBoard);
+  }
+
+  console.log('🌱 Seeding tickets...');
+  const ticketService = app.get(TicketService);
+  const ticketList: TicketEntity[] = [];
+  for (const item of TICKET_MOCK) {
+    const ticket = await ticketService.create({
+      ...item,
+      board: { id: ticketBoardList[getRandomInt(ticketBoardList.length, [])].id },
+      assignee: { id: userList[getRandomInt(userList.length, [])].id },
+      reporter: { id: userList[getRandomInt(userList.length, [])].id },
+    } as TicketEntity);
+    ticketList.push(ticket);
   }
 
   console.log('✅ Done seeding!');

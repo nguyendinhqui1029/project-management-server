@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { ProjectEntity } from '@entities/projects.entity';
 import { TicketEntity } from '@entities/tickets.entity';
 
@@ -7,14 +15,14 @@ export class TicketBoardEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, p => p.boards)
+  @ManyToOne(() => ProjectEntity, (p) => p.boards)
   project!: ProjectEntity;
 
   @Column()
   name!: string;
 
-  @OneToMany(() => TicketEntity, t => t.board)
-  tickets!: TicketEntity[];
+  @OneToMany(() => TicketEntity, (t) => t.board)
+  tickets?: TicketEntity[];
 
   @CreateDateColumn()
   createdAt?: Date;

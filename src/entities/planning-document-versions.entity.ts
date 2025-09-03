@@ -10,7 +10,7 @@ import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
 import { UserEntity } from '@entities/users.entity';
 
 @Entity('planning_document_versions')
-export class  PlanningDocumentVersionEntity {
+export class PlanningDocumentVersionEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

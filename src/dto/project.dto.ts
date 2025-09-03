@@ -1,16 +1,12 @@
-import { Optional } from '@nestjs/common';
 import { Type } from 'class-transformer';
 import {
   IsArray,
-  IsBoolean,
   IsDate,
   IsIn,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  Min,
-  ValidateIf,
   ValidateNested,
 } from 'class-validator';
 import { UserRefDto } from '@dto/user.dto';
@@ -33,10 +29,14 @@ export class CreateProjectRequestBodyDto {
   @IsNotEmpty({ message: 'Name is required' })
   @IsString()
   name!: string;
-  
+
   @IsOptional()
   @IsString()
   description!: string;
+
+  @IsOptional()
+  @IsNumber()
+  projectProgress?: number;
 
   @IsNotEmpty({ message: 'Start date is required' })
   @IsDate()
@@ -62,10 +62,14 @@ export class UpdateProjectRequestBodyDto {
   @IsNotEmpty({ message: 'Name is required' })
   @IsString()
   name!: string;
-  
+
   @IsOptional()
   @IsString()
   description!: string;
+
+  @IsOptional()
+  @IsNumber()
+  projectProgress?: number;
 
   @IsNotEmpty({ message: 'Start date is required' })
   @IsDate()
@@ -113,6 +117,8 @@ export class FetchProjectRequestQueryDto {
   owner?: string;
 
   @IsOptional()
-  @IsIn(Object.values(ProjectStatus), { message: 'Status must be one of the following: ' + Object.values(ProjectStatus).join(', ') })
+  @IsIn(Object.values(ProjectStatus), {
+    message: 'Status must be one of the following: ' + Object.values(ProjectStatus).join(', '),
+  })
   status?: ProjectStatus;
 }

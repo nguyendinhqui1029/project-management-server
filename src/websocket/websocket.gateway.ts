@@ -14,10 +14,7 @@ export class WebsocketGateway {
 
   // Khi client gửi event 'message'
   @SubscribeMessage('message')
-  handleMessage(
-    @MessageBody() data: string,
-    @ConnectedSocket() client: Socket,
-  ) {
+  handleMessage(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
     console.log(`Message from ${client.id}:`, data);
     this.server.emit('message', `Server nhận: ${data}`); // Gửi lại cho tất cả clients
   }
