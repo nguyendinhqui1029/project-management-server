@@ -41,8 +41,8 @@ function getRandomInt(n: number, excludesIndex: number[]): number {
   return randomInt;
 }
 
-function parseDate(value: string): Date | null {
-  return value ? new Date(value) : null;
+function parseDate(value: string): number | null {
+  return value ? new Date(value).getTime() : null;
 }
 
 async function bootstrap() {
@@ -95,8 +95,9 @@ async function bootstrap() {
     const excludesUserListIndex: number[] = [];
     const project = await projectService.create({
       ...item,
-      startDate: parseDate(item.startDate) || new Date(),
-      endDate: parseDate(item.endDate) || new Date(),
+      isUnlimited: false,
+      startDate: parseDate(item.startDate) || 0,
+      endDate: parseDate(item.endDate) || 0,
       owner: { id: userList[getRandomInt(userList.length, [])].id },
       participants: [
         { id: userList[getRandomInt(userList.length, excludesUserListIndex)].id },

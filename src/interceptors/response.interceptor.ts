@@ -17,7 +17,7 @@ export class ResponseInterceptor<T = unknown> implements NestInterceptor<T, Resp
         }
         return {
           statusCode: 200,
-          data,
+          data: data,
         };
       }),
     );

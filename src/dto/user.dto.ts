@@ -1,4 +1,5 @@
-import { IsIn, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsIn, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 enum UserRole {
   Admin = 'Admin',
@@ -75,11 +76,15 @@ export class UpdateUserRequestBodyDto {
 
 export class FetchUserRequestQueryDto {
   @IsNotEmpty({ message: 'Limit is required' })
+  @Type(() => Number)
   @IsNumber({}, { message: 'Limit must be a number' })
+  @Min(10, { message: 'Limit must be at least 10' })
   limit!: number;
 
   @IsNotEmpty({ message: 'Page is required' })
+  @Type(() => Number)
   @IsNumber({}, { message: 'Page must be a number' })
+  @Min(1, { message: 'Page must be at least 1' })
   page!: number;
 
   @IsOptional()

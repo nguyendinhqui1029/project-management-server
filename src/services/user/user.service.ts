@@ -1,7 +1,11 @@
 import { UserEntity } from '@entities/users.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserRequestBodyDto, UpdateUserRequestBodyDto } from '@dto/user.dto';
+import {
+  CreateUserRequestBodyDto,
+  FetchUserRequestQueryDto,
+  UpdateUserRequestBodyDto,
+} from '@dto/user.dto';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -26,5 +30,19 @@ export class UserService {
 
   getUserById(id: number) {
     return this.userRepo.findOne({ where: { id } });
+  }
+
+  async getAllUser(queryParams: FetchUserRequestQueryDto) {
+    const { page = 1, limit = 10, ...filters } = queryParams;
+    const [filterResult, totalFilterCount] = await this.userRepo.findAndCount({
+      where: { ...filters },
+      take: limit,
+      skip: (page - 1) * limit,
+      order: { createdAt: 'DESC' },
+    });
+    return {
+      filterResult,
+      totalFilterCount,
+    };
   }
 }

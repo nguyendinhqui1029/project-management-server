@@ -1,17 +1,22 @@
 [
   {
-    "name": "Backend API Development"
+    "name": "Backend API Development",
+    "isDefault": true
   },
   {
-    "name": "Frontend UI Implementation"
+    "name": "Frontend UI Implementation",
+    "isDefault": false
   },
   {
-    "name": "Database Migration Plan"
+    "name": "Database Migration Plan",
+    "isDefault": false
   },
   {
-    "name": "Mobile App Prototype"
+    "name": "Mobile App Prototype",
+    "isDefault": false
   },
   {
-    "name": "System Integration Testing"
+    "name": "System Integration Testing",
+    "isDefault": false
   }
 ]

@@ -8,6 +8,8 @@ import {
   ManyToMany,
   JoinTable,
   UpdateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { UserEntity } from '@entities/users.entity';
 import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
@@ -27,11 +29,24 @@ export class ProjectEntity {
   @Column({ type: 'text', nullable: true })
   description?: string;
 
-  @Column({ type: 'date', nullable: true })
-  startDate!: Date;
+  @Column({ type: 'datetime', nullable: true })
+  startDate!: Date | null;
+  @BeforeInsert()
+  @BeforeUpdate()
+  convertStartDateNumberToDateTime() {
+    this.startDate = this.startDate ? new Date(this.startDate) : null;
+  }
 
-  @Column({ type: 'date', nullable: true })
-  endDate?: Date;
+  @Column({ type: 'datetime', nullable: true })
+  endDate!: Date | null;
+  @BeforeInsert()
+  @BeforeUpdate()
+  convertEndDateNumberToDateTime() {
+    this.endDate = this.endDate ? new Date(this.endDate) : null;
+  }
+
+  @Column({ type: Boolean, default: false })
+  isUnlimited!: boolean;
 
   @Column({
     type: 'enum',
@@ -58,7 +73,7 @@ export class ProjectEntity {
   @UpdateDateColumn()
   updatedAt?: Date;
 
-  @ManyToMany(() => UserEntity, { cascade: true })
+  @ManyToMany(() => UserEntity, { cascade: false })
   @JoinTable({
     name: 'project_participants', // tên bảng trung gian
     joinColumn: { name: 'project_id', referencedColumnName: 'id' },

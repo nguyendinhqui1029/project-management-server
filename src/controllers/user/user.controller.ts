@@ -1,10 +1,19 @@
-import { CreateUserRequestBodyDto, UpdateUserRequestBodyDto } from '@dto/user.dto';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  CreateUserRequestBodyDto,
+  FetchUserRequestQueryDto,
+  UpdateUserRequestBodyDto,
+} from '@dto/user.dto';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { UserService } from '@services/user/user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get()
+  getAllUser(@Query() params: FetchUserRequestQueryDto) {
+    return this.userService.getAllUser(params);
+  }
 
   @Post()
   createUser(@Body() body: CreateUserRequestBodyDto) {

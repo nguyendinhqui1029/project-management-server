@@ -21,6 +21,9 @@ export class TicketBoardEntity {
   @Column()
   name!: string;
 
+  @Column()
+  isDefault!: boolean;
+
   @OneToMany(() => TicketEntity, (t) => t.board)
   tickets?: TicketEntity[];
 

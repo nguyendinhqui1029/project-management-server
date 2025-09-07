@@ -1,7 +1,7 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
-  IsDate,
+  IsBoolean,
   IsIn,
   IsNotEmpty,
   IsNumber,
@@ -39,12 +39,16 @@ export class CreateProjectRequestBodyDto {
   projectProgress?: number;
 
   @IsNotEmpty({ message: 'Start date is required' })
-  @IsDate()
-  startDate!: Date;
+  @IsNumber()
+  startDate!: number;
 
   @IsNotEmpty({ message: 'End date is required' })
-  @IsDate()
-  endDate!: Date;
+  @IsNumber()
+  endDate!: number;
+
+  @IsNotEmpty({ message: 'isUnlimited is required' })
+  @IsBoolean()
+  isUnlimited!: boolean;
 
   @IsNotEmpty({ message: 'OwnerId is required' })
   @ValidateNested()
@@ -72,12 +76,16 @@ export class UpdateProjectRequestBodyDto {
   projectProgress?: number;
 
   @IsNotEmpty({ message: 'Start date is required' })
-  @IsDate()
-  startDate!: Date;
+  @IsNumber()
+  startDate!: number;
 
   @IsNotEmpty({ message: 'End date is required' })
-  @IsDate()
-  endDate!: Date;
+  @IsNumber()
+  endDate!: number;
+
+  @IsNotEmpty({ message: 'isUnlimited is required' })
+  @IsBoolean()
+  isUnlimited!: boolean;
 
   @IsNotEmpty({ message: 'OwnerId is required' })
   @ValidateNested()
@@ -105,12 +113,14 @@ export class FetchProjectRequestQueryDto {
   name?: string;
 
   @IsOptional()
-  @IsDate()
-  startDate?: Date;
+  @IsNumber()
+  @Transform(({ value }: { value: number }) => (value ? new Date(value) : null))
+  startDate?: number;
 
   @IsOptional()
-  @IsDate()
-  endDate?: Date;
+  @IsNumber()
+  @Transform(({ value }: { value: number }) => (value ? new Date(value) : null))
+  endDate?: number;
 
   @IsOptional()
   @IsString()

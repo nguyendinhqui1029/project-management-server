@@ -27,7 +27,7 @@ export class TicketService {
   async getTicketById(id: number) {
     const result = this.ticketEntityRepo.findOne({
       where: { id },
-      relations: ['project', 'tickets'],
+      relations: ['project'],
     });
     return result;
   }
