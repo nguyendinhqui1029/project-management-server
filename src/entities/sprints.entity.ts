@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { ProjectEntity } from '@entities/projects.entity';
 import { TicketEntity } from '@entities/tickets.entity';
 import { SprintRetroEntity } from '@entities/sprint-retros.entity';
@@ -8,7 +8,10 @@ export class SprintEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, (p) => p.sprints)
+  @ManyToOne(() => ProjectEntity, (p) => p.sprints, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'projectId' })
   project!: ProjectEntity;
 
   @Column()

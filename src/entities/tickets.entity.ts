@@ -5,6 +5,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { TicketBoardEntity } from '@entities/ticket-board.entity';
 import { SprintEntity } from '@entities/sprints.entity';
@@ -15,7 +16,10 @@ export class TicketEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => TicketBoardEntity, (b) => b.tickets)
+  @ManyToOne(() => TicketBoardEntity, (board) => board.tickets, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'boardId' })
   board!: TicketBoardEntity;
 
   @ManyToOne(() => SprintEntity, (s) => s.tickets, { nullable: true })

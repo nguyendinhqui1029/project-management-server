@@ -8,6 +8,7 @@ import {
   ManyToMany,
   JoinTable,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { ProjectEntity } from '@entities/projects.entity';
 import { UserEntity } from '@entities/users.entity';
@@ -19,7 +20,10 @@ export class PlanningDocumentEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, (p) => p.planningDocuments)
+  @ManyToOne(() => ProjectEntity, (p) => p.planningDocuments, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'projectId' })
   project!: ProjectEntity;
 
   @Column()

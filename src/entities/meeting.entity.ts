@@ -7,6 +7,7 @@ import {
   JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { ProjectEntity } from '@entities/projects.entity';
 import { UserEntity } from '@entities/users.entity';
@@ -16,7 +17,10 @@ export class MeetingEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, (p) => p.meetings)
+  @ManyToOne(() => ProjectEntity, (p) => p.meetings, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'projectId' })
   project!: ProjectEntity;
 
   @Column()

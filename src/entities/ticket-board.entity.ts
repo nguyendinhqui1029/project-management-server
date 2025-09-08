@@ -6,6 +6,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { ProjectEntity } from '@entities/projects.entity';
 import { TicketEntity } from '@entities/tickets.entity';
@@ -15,7 +16,10 @@ export class TicketBoardEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ProjectEntity, (p) => p.boards)
+  @ManyToOne(() => ProjectEntity, (p) => p.boards, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'projectId' })
   project!: ProjectEntity;
 
   @Column()
