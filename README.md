@@ -1,50 +1,96 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a Project Management System built with [NestJS](https://github.com/nestjs/nest) framework, featuring real-time updates through WebSocket, MySQL database integration, and comprehensive project management capabilities.
 
-## Project setup
+## Prerequisites
 
+Before setting up the project, ensure you have:
+- Node.js (latest LTS version)
+- Docker and Docker Compose
+- MySQL 8.0 (if not using Docker)
+- Git
+
+## Project Setup
+
+### 1. Install Dependencies
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+### 2. Database Setup
 
+Using Docker (Recommended):
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Start MySQL container
+docker compose up --build -d
 ```
 
-## Run tests
+This will create a MySQL 8.0 instance with:
+- Database: project-management
+- Username: root
+- Password: 123456
+- Port: 3306
+
+### 3. Environment Configuration
+
+Create `.env` file in the root directory:
+```env
+# Database
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=123456
+DB_DATABASE=project-management
+
+# Server
+PORT=3000
+```
+
+### 4. Initialize Mock Data
+```bash
+npm run seed:init-mock-data
+```
+
+## Running the Project
+
+### Development Mode
+```bash
+# Watch mode with auto-reload
+npm run start:dev
+```
+
+### Production Mode
+```bash
+# Build the project
+npm run build
+
+# Start production server
+npm run start:prod
+```
+
+### Debug Mode
+```bash
+npm run start:debug
+```
+
+## Available Commands
+
+### Project Management
+- `npm run build` - Build the application
+- `npm run format` - Format code with Prettier
+- `npm run lint` - Lint and fix code
+
+### Development
+- `npm run start` - Start the server
+- `npm run start:dev` - Start with auto-reload
+- `npm run start:debug` - Start in debug mode
+- `npm run start:prod` - Start in production
+
+### Database
+- `npm run seed:init-mock-data` - Initialize database with mock data
+
+### Testing
 
 ```bash
 # unit tests
@@ -70,29 +116,63 @@ $ mau deploy
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## Resources
+## Project Structure
 
-Check out a few resources that may come in handy when working with NestJS:
+```
+src/
+├── controllers/        # API Controllers
+├── dto/               # Data Transfer Objects
+├── entities/          # Database Entities
+├── interceptors/      # Request/Response Interceptors
+├── mocks/            # Mock Data for Testing
+├── scripts/          # Utility Scripts
+├── services/         # Business Logic
+├── utils/            # Helper Functions
+├── validators/       # Custom Validators
+└── websocket/        # WebSocket Implementation
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Features
 
-## Support
+- User Management
+- Project Management
+- Sprint Planning
+- Ticket Management
+- Real-time Updates via WebSocket
+- Meeting Management
+- Planning Documents
+- Sprint Retrospectives
+- Secure Authentication
+- Role-based Access Control
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## API Documentation
 
-## Stay in touch
+Once the server is running, access the API documentation at:
+- http://localhost:3000/api (default port)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## SSL Configuration
+
+SSL certificates are located in the `ssl` folder:
+- `cert.pem` - SSL certificate
+- `key.pem` - SSL private key
+
+## Technologies
+
+- NestJS - Backend Framework
+- TypeORM - Database ORM
+- MySQL 8 - Database
+- Socket.IO - Real-time Communication
+- Class Validator - DTO Validation
+- Docker - Containerization
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License.
+
+PORT=3000
+API_PATH=api/v1
+
+MYSQL_ROOT_PASSWORD=     # Mật khẩu cho user root
+MYSQL_DATABASE=project-management
+MYSQL_ROOT_USERNAME=root
+MYSQL_HOST=127.0.0.1
