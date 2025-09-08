@@ -5,6 +5,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { PlanningDocumentEntity } from '@entities/planning-documents.entity';
 import { UserEntity } from '@entities/users.entity';
@@ -14,7 +15,10 @@ export class PlanningDocumentVersionEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => PlanningDocumentEntity, (doc) => doc.versions)
+  @ManyToOne(() => PlanningDocumentEntity, (doc) => doc.versions, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'documentId' })
   document!: PlanningDocumentEntity;
 
   @Column()
