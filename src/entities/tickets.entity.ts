@@ -6,10 +6,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { TicketBoardEntity } from '@entities/ticket-board.entity';
 import { SprintEntity } from '@entities/sprints.entity';
 import { UserEntity } from '@entities/users.entity';
+import { TodoEntity } from '@entities/todo.entity';
 
 @Entity('tickets')
 export class TicketEntity {
@@ -24,6 +26,9 @@ export class TicketEntity {
 
   @ManyToOne(() => SprintEntity, (s) => s.tickets, { nullable: true })
   sprint?: SprintEntity;
+
+  @OneToMany(() => TodoEntity, (todo) => todo.ticket, { cascade: true })
+  todos?: TodoEntity[];
 
   @Column()
   title!: string;

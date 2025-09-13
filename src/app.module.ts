@@ -39,6 +39,7 @@ import { SprintRetroEntity } from '@entities/sprint-retros.entity';
 import { RetroItemEntity } from '@entities/retro-items.entity';
 import { PlanningDescriptionsService } from './services/planning-descriptions/planning-descriptions.service';
 import { PlanningDocumentVersionService } from './services/planning-document-version/planning-document-version.service';
+import { TodoEntity } from '@entities/todo.entity';
 
 @Module({
   imports: [
@@ -78,6 +79,7 @@ import { PlanningDocumentVersionService } from './services/planning-document-ver
       SprintRetroEntity,
       SprintPlanningEntity,
       RetroItemEntity,
+      TodoEntity,
     ]),
   ],
   controllers: [
